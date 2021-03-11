@@ -32,5 +32,25 @@ module.exports.main = (event, context, callback) => {
                     (totalEnPesos += parseFloat(transactions[i].amount) * dolar);
             }
         }
+
+        //Si el status es 500
+
+        if (statusCode === 500) {
+            response = codeResponse(500, "Internal Server Error");
+        } else {
+            //si la operacion fue exitosa
+            response = {
+                body: JSON.stringify({
+                    status: 200,
+                    message: "OK",
+                    balance: {
+                        amounts: {
+                            ars: totalEnPesos,
+                            usd: totalEnPesos / dolar
+                        }
+                    }
+                })
+            }
+        }
     }
 }
