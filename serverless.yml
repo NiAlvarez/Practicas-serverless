@@ -1,0 +1,19 @@
+service: show-body-header
+
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  state: develop
+  region: us-east-2
+  memorySize: 128
+  runtime: nodejs12.x
+
+functions:
+  showBodyHeader:
+    handler: handler.main
+    events:
+      - http:
+          path: bodyHeader
+          method: post
